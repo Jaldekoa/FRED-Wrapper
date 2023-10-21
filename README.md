@@ -68,6 +68,7 @@ You can obtain the data from a multiple series in either of the following two wa
 ```python
 from FRED_Wrapper import FRED_Wrapper
 
+# First way
 df = FRED_Wrapper.get_fred_data(id=["WM1NS", "WM2NS"],
 				start_date=["2020-01-01", "2020-01-01"],
 				end_date=["2023-08-31", "2023-08-31"],
@@ -81,6 +82,7 @@ df = FRED_Wrapper.get_fred_data(id=["WM1NS", "WM2NS"],
 ```python
 from FRED_Wrapper import FRED_Wrapper
 
+# Second way
 PARAMS = {
     "id": ["WM1NS", "WM2NS"],  
     "start_date": ["2020-05-01", "2020-05-01"],  
@@ -93,6 +95,8 @@ PARAMS = {
   
 df = FRED_Wrapper.get_fred_data(**PARAMS)
 ```
+
+You are not restricted to getting only two series at a time. You can get as many series as you want in a single method call. The only condition is that it will return all series in a single pandas DataFrame.
 
 #### Result
 
