@@ -39,12 +39,12 @@ You can obtain the data for a single series as follows:
 from FRED_Wrapper import FRED_Wrapper
 
 df = FRED_Wrapper.get_fred_data(id="WM1NS",
-								start_date="2020-01-01",
-								end_date="2023-08-31",
-								transform="chg",
-								freq="Monthly",
-								agg="eop",
-								formula="a/1000")
+				start_date="2020-01-01",
+				end_date="2023-08-31",
+				transform="chg",
+				freq="Monthly",
+				agg="eop",
+				formula="a/1000")
 ```
 
 #### Result
@@ -69,19 +69,19 @@ You can obtain the data from a multiple series in either of the following two wa
 from FRED_Wrapper import FRED_Wrapper
 
 df = FRED_Wrapper.get_fred_data(id=["WM1NS", "WM2NS"],
-                   start_date=["2020-01-01", "2020-01-01"],
-                   end_date=["2023-08-31", "2023-08-31"],
-                   transform=["chg", "chg"],
-                   freq=["Monthly", "Monthly"],
-                   agg=["eop", "eop"],
-                   formula=["a/1000", "a/1000"])
+				start_date=["2020-01-01", "2020-01-01"],
+				end_date=["2023-08-31", "2023-08-31"],
+				transform=["chg", "chg"],
+				freq=["Monthly", "Monthly"],
+				agg=["eop", "eop"],
+				formula=["a/1000", "a/1000"])
 )
 ```
 
 ```python
 from FRED_Wrapper import FRED_Wrapper
 
-PARAMS = {  
+PARAMS = {
     "id": ["WM1NS", "WM2NS"],  
     "start_date": ["2020-05-01", "2020-05-01"],  
     "end_date": ["2023-08-31", "2023-08-31"],
