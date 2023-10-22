@@ -2,6 +2,21 @@
 
 This repository contains a Python class that allows you to interact with and get data from the FRED website in a simple way without the need to connect to the API or register or get a KEY API.
 
+## Installation
+
+Install via pip with the  Github repository:
+
+```shell
+pip install git+https://github.com/Jaldekoa/FRED-Wrapper.git#egg=FRED_Wrapper
+```
+You also can install it in the traditional way:
+
+``` shell
+git clone https://github.com/Jaldekoa/FRED-Wrapper.git
+cd FRED-Wrapper
+python setup.py install
+```
+
 ## Methods
 
 The Python class provides a way to get data from the FRED web page. Instead of using the official API, this class makes direct requests to the web page and gets the data in CSV format.
