@@ -27,7 +27,8 @@ class FRED_Wrapper:
             str: Encoded url
         """
         base_url = "https://fred.stlouisfed.org/graph/fredgraph.csv"
-        valid_params = {"id": "id", "start_date": "cosd", "end_date": "coed", "transform": "transformation", "freq": "fq", "agg": "fam", "formula": "fml"}
+        valid_params = {"id": "id", "start_date": "cosd", "end_date": "coed", "transform": "transformation",
+                        "freq": "fq", "agg": "fam", "formula": "fml"}
 
         params = {k: ",".join(v) for k, v in params.items()} if (all(isinstance(v, list) for v in params.values())) else params
         web_params = {v: params[k] for k, v in valid_params.items() if k in params and params[k]}
