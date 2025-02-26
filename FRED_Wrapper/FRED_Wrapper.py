@@ -50,7 +50,7 @@ class FRED_Wrapper:
         if res.headers["content-type"] == "application/zip":
             with zipfile.ZipFile(BytesIO(res.content)) as zf:
                 dfs = [pd.read_csv(zf.open(file_info)) for file_info in zf.infolist()]
-                df = ft.reduce(lambda left, right: pd.merge(left, right, on="DATE", how="outer"), dfs)
+                df = ft.reduce(lambda left, right: pd.merge(left, right, on="observation_date", how="outer"), dfs)
             return df
 
         else:
@@ -94,7 +94,7 @@ class FRED_Wrapper:
         else:
             urls = [cls.__encode_kwargs(kw) for kw in cls.__split_dict(kwargs, max_len=10)]
             dfs = [cls.__read_data_from_url(url) for url in urls]
-            res = ft.reduce(lambda left, right: pd.merge(left, right, on="DATE", how="outer"), dfs)
+            res = ft.reduce(lambda left, right: pd.merge(left, right, on="observation_date", how="outer"), dfs)
 
         cols = res.columns.drop(res.columns[0])
         res.iloc[:, 0], res[cols] = pd.to_datetime(res.iloc[:, 0]), res[cols].apply(pd.to_numeric, errors='coerce')
