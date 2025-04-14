@@ -45,16 +45,16 @@ class FRED_Wrapper:
         Return:
             pd.DataFrame: DataFrame with FRED data
         """
-        res = requests.get(url)
+        response = requests.get(url)
+        content = BytesIO(response.content)
 
-        if res.headers["content-type"] == "application/zip":
-            with zipfile.ZipFile(BytesIO(res.content)) as zf:
-                dfs = [pd.read_csv(zf.open(file_info)) for file_info in zf.infolist()]
-                df = ft.reduce(lambda left, right: pd.merge(left, right, on="observation_date", how="outer"), dfs)
-            return df
+        if response.headers.get("content-type") == "application/zip":
+            with zipfile.ZipFile(content) as zf:
+                csv_files = [f for f in zf.namelist() if f.lower().endswith(".csv")]
+                dfs = [pd.read_csv(zf.open(f)) for f in csv_files]
+                return ft.reduce(lambda left, right: pd.merge(left, right, on="observation_date", how="outer"), dfs)
 
-        else:
-            return pd.read_csv(BytesIO(res.content))
+        return pd.read_csv(content)
 
     @staticmethod
     def __split_dict(params: dict, max_len: int) -> list:
